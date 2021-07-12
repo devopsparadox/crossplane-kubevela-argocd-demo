@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: team-a-apps-reqs
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: production
+  source:
+    path: team-a-app-reqs
+    repoURL: https://github.com/devopsparadox/crossplane-kubevela-argocd-demo
+    targetRevision: HEAD
+  destination:
+    server: https://C29F900E2E406E8FF45B0A6CAC856275.gr7.us-east-1.eks.amazonaws.com
+    namespace: production
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+      allowEmpty: true
